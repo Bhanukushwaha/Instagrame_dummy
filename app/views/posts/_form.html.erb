@@ -1,3 +1,5 @@
+  <%= link_to 'Back', posts_path, class: "btn btn-outline-success" %>
+
 <%= form_with(model: post, local: true) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
@@ -11,22 +13,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :tittel %>
-    <%= form.text_field :tittel %>
-  </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group row">
+    <label for="staticTitle" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+      <%= form.text_field :title ,class: "form-control",id: "inputPassword", placeholder: "Title"%>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :Images %>
-    <%= form.file_field :image, multiple: true %>
+  <div class="form-group row">
+    <label for="inputTitle" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+      <%= form.text_area :description, class: "form-control",placeholder: "description" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Images</label>
+    <div class="col-sm-10">
+      <%= form.file_field :image, multiple: true %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-secondary"%>
   </div>
 <% end %>
+<style type="text/css">
+  .actions{
+    position: absolute;
+    margin-left: 190px;
+  }
+</style>

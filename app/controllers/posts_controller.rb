@@ -10,7 +10,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-  end
+  @post = Post.find(params[:id])
+  end  
 
   # GET /posts/new
   def new
@@ -21,18 +22,38 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def like  
+    @post = Post.find(params[:post_id])
+    @post.likes.create(user_id: current_user.id)
+    # UserMailer.welcome_email(@comment).deliver_now
+    redirect_to post_path(@post)    
+  end
+
+
+  def unlike
+    @post = Post.find(params[:post_id])
+    @like = Like.where(:post_id=>params[:post_id], :user_id=>current_user.id).first
+    #@like = @post.likes.first
+    @like = @like.destroy
+    redirect_to post_path(@post)
+  end
+
+
+
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
 
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
     respond_to do |format|
+
       if @post.save
        images = params[:post][:image]
         if images.present?
           images.each do |img|
       
             picture = Picture.new(image: img, post_id: @post.id)
-            # picture = @post.pictures.new(image: params[:post][:image])
+            #picture = @post.pictures.new(image: params[:post][:image])
             picture.save
           end
         end
@@ -61,7 +82,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
@@ -76,6 +96,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:tittel, :user_id, :description, :image)
+      params.require(:post).permit(:title, :user_id, :description, :image)
     end
 end
+  

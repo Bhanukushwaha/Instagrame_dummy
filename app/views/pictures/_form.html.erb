@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :Post_id %>
-    <%= form.text_field :Post_id %>
+    <%= form.label :post_id %>
+    <%= form.select :post_id, Post.all.map { |e| [e.id]} %>
   </div>
 
   <div class="field">
     <%= form.label :image %>
-    <%= form.file_field :image,:onchange => "showimagepreview(this)" %><br>
+    <%= form.file_field :image,:onchange => "showimagepreview(this)",:class=>"img_file"  %><br>
      <img id="imgprvw" style="width: 200px; height: 94px; " />
   </div>
 
@@ -26,7 +26,9 @@
     <%= form.submit %>
   </div>
 <% end %>
-<!-- 
+
+
+
 <script>
   function showimagepreview(input) {
     if (input.files && input.files[0]) {
@@ -40,4 +42,3 @@
   }
 </script>
 
- -->

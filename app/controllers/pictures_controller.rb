@@ -21,8 +21,10 @@ class PicturesController < ApplicationController
 
   # POST /pictures or /pictures.json
   def create
+  
+     # @post = Post.find(params[:post_id])
+     # @picture = @post.pictures.create(picture_params)
     @picture = Picture.new(picture_params)
-
     respond_to do |format|
       if @picture.save
         format.html { redirect_to picture_url(@picture), notice: "Picture was successfully created." }
@@ -65,6 +67,6 @@ class PicturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def picture_params
-      params.require(:picture).permit(:Post_id, :image)
+      params.require(:picture).permit(:post_id, :image)
     end
 end

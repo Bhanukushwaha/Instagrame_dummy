@@ -22,3 +22,33 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+]
+
+
+.................................................
+.................................................
+.................................................
+.................................................
+.................................................
+.................................................
+TodO:::
+
+
+make a table of comment - $  rails g model Comment title:string post_id:integer
+make a controller of comment 
+will make route for the comment - post ke comment banenge 
+post ki id jayegi comment table mein 
+controller mein post ke comment nikaloge - guides.rubyonrails.org se dekh lena : article ke comment kaise nikalte hain - aise hi post ke comment nikaloge 
+
+.................................................
+
+
+like aur dislike kaise karna hai post ko --- 
+
+follow this blog ::
+
+https://medium.com/full-taxx/how-to-add-likes-to-posts-in-rails-e81430101bc2
+like ka model banega
+controller banega 
+
+
