@@ -26,7 +26,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:post_id])
     @post.likes.create(user_id: current_user.id)
     # UserMailer.welcome_email(@comment).deliver_now
-    redirect_to post_path(@post)    
+    # redirect_to post_path(@post)
+    respond_to do |format|
+      format.js
+    end   
   end
 
 
@@ -35,7 +38,10 @@ class PostsController < ApplicationController
     @like = Like.where(:post_id=>params[:post_id], :user_id=>current_user.id).first
     #@like = @post.likes.first
     @like = @like.destroy
-    redirect_to post_path(@post)
+    # redirect_to post_path(@post)
+    respond_to do |format|
+      format.js
+    end
   end
 
 
@@ -70,6 +76,15 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        images = params[:post][:image]
+        if images.present?
+          @post.pictures.destroy_all if @post.pictures.present?
+          images.each do |img|
+            picture = Picture.new(image: img, post_id: @post.id)
+            #picture = @post.pictures.new(image: params[:post][:image])
+            picture.save
+          end
+        end
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else

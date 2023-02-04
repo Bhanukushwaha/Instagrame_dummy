@@ -1,0 +1,11 @@
+<% if !Like.where(post_id: @post.id, :user_id=>current_user.id).present? %>
+  <a href="/like?post_id=<%= @post.id%>" class="d-flex align-items-center me-3" data-remote="true">
+    <i class="far fa-thumbs-up me-2"></i>
+    <p class="mb-0">Like <small>(<%= @post.likes.count%>)</small></p>
+  </a>
+<% else %>
+  <a href="/unlike?post_id=<%= @post.id%>" class="d-flex align-items-center me-3" data-remote="true">
+    <i class="far fa-thumbs-down me-2"></i>
+    <p class="mb-0">Like<small>(<%= @post.likes.count%>)</small></p>
+  </a>
+<% end %>

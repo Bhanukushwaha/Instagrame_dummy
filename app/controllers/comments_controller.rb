@@ -26,12 +26,12 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
   
     # UserMailer.with(user: @user).welcome_email.deliver_later
-    redirect_to post_path(@post)    
+    render post_path(@post)    
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    respond_to do |format|
+    respond_to do |format|  
       if @comment.update(comment_params)
         format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
         format.json { render :show, status: :ok, location: @comment }
@@ -45,10 +45,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1 or /comments/1.json
   def destroy
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
     @comment.destroy
     redirect_to post_path(@post), status: :see_other
-    @comment.destroy
 
     # respond_to do |format|
     #   format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
@@ -67,6 +65,6 @@ class CommentsController < ApplicationController
     #   params.fetch(:comment, {})
     # end
     def comment_params
-      params.require(:comment).permit(:title, :post_id)
+      params.require(:comment).permit(:title, :post_id, :user_id)
     end
 end

@@ -3,13 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
   get 'like' =>'posts#like', as: :like
   get 'unlike' =>'posts#unlike', as: :unlike
-  get "/comment_delete/:id/:post_id", to: "comments#destroy"
+  delete "/comments/:id", to: "comments#destroy"
   resources :posts do  
     resources :likes
     resources :comments
-    resources :likes
-    # resources :likes, only: [:create, :destroy] 
-    # resources :comments, controller: 'posts/comment'
   end
      resources :pictures
 
