@@ -10,7 +10,7 @@ class User < ApplicationRecord
   private 
   def set_username
    user_na = self.email.split('@').first
-   self.user_name
+   self.user_name = user_na
    self.save
   end 
 end
