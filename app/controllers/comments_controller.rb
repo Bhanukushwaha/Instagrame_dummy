@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   # POST /comments or /comments.json
   def create
     @comment = Comment.new(comment_params)
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
   
     # UserMailer.with(user: @user).welcome_email.deliver_later
