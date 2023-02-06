@@ -7,8 +7,8 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @picture.image  %>
-</p>
+ <%= image_tag @picture.image.url, style: "width: 400px; height: 250px; " %>
+</p>          
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>
