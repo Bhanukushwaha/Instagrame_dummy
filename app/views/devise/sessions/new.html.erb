@@ -1,5 +1,6 @@
+<div class="logein">
+  
 <h2>Log in</h2>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -24,3 +25,16 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+
+<style type="text/css">
+  .logein{
+    width: 300px;
+    height: 300px;
+    background-color:silver;
+    text-align: center;
+    margin-left:30%;
+  }
+   
+
+</style>
