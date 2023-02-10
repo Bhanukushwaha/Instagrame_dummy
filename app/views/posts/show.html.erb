@@ -5,8 +5,13 @@
       <div class="col-md-12 col-lg-10 col-xl-8">
         <div class="card">
           <div class="card-body">
-            <div class="d-flex flex-start align-items-center">
-            <%= image_tag @post.user.image.url, class: "rounded-circle shadow-1-strong me-3", style: "width: 60px; height: 60px;"%>             
+            <div class="d-flex flex-start align-items-center">              
+              <% if @post.user.image.present? %>
+                <%= image_tag @post.user.image.url, class: "rounded-circle shadow-1-strong me-3", style: "width: 60px; height: 60px;"%>
+                <% else %>                
+               <img class="rounded-circle shadow-1-strong me-3"
+                src="<%= asset_path("avatar.png")%>" alt="avatar" width="60" height="60" />
+              <% end %>
               <!-- <img class="rounded-circle shadow-1-strong me-3"
                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60" height="60" /> -->
               <div>
@@ -32,7 +37,7 @@
                 <strong>Description:</strong>
                 <%= @post.description %>
               </p>
-<!-- 
+              <!-- 
               <p>
                 <strong>user_id:</strong>
                 <%#= @post.user_id %>
@@ -43,8 +48,10 @@
               <!-- <strong >Pictures:</strong> -->
               <% if @post.pictures.present? %>
                 <% @post.pictures.each do |pic| %> 
-                <%= image_tag pic.image.url, style: "width: 700px; height: 400px; " %>
-              <% end %>
+                  <%= image_tag pic.image.url, style: "width: 700px; height: 400px; " %>
+                <% end %>
+                <% else %>
+                  <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style= "width: 700px; height: 400px; " />                
               <%end %>
             </p>
 

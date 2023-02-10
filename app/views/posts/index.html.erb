@@ -3,13 +3,12 @@
 <!-- <h1>Posts</h1> -->
 <!-- <p><%#= post.likes.count %> <%#= (post.likes.count) == 1 ? 'Like' : 'Likes'%></p> -->
 
-<%= link_to 'New Post', new_post_path,class:  "btn btn-success" %>
-
 <table id="myTable">
   <thead>
     <tr class="header">
-      <th style="width:30%;">Title</th>      
-      <th style="width:30%;">Description</th>
+      <th style="width:25%;">user name</th> 
+      <th style="width:25%;">Title</th>      
+      <th style="width:25%;">Description</th>
       <th colspan="3" style="width:25%;">Action</th>
     </tr>
   </thead>
@@ -17,6 +16,7 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
+        <td><%= post.user.user_name %></td>
         <td><%= post.title %></td>        
         <td><%= post.description %></td>
         <td><%= link_to 'Show', post %></td>
@@ -29,7 +29,7 @@
 
 <br>
 
-
+<%= link_to 'New Post', new_post_path,class:  "btn btn-success" %>
 <style>
 * {
   box-sizing: border-box;

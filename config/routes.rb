@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   delete "/comments/:id", to: "comments#destroy"
   resources :posts do  
     resources :likes
-    resources :comments
+    resources :comments    
   end
      resources :pictures
+     get 'profile' => 'users#profile', as: :profile
 
   # get "/posts", to: "posts#index"
   root "posts#index"

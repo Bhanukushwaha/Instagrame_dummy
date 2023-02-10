@@ -32,18 +32,22 @@
         <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li> -->
+        
         <li class="nav-item">
           <a class="nav-link" href="/posts">Posts</a> 
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/pictures">Pictures</a>
-        </li>              
+        </li>
       </ul>
       <form class="d-flex">
         <ul class="navbar-nav me-auto mb-9 mb-lg-0">
           <% if user_signed_in? %>
           <li class="nav-item">
-            <a class="nav-link" href="/users/sign_out">Sign_out</a>
+            <a class="nav-link" href="/profile">Profile(<%= current_user.user_name %>)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/sign_out">Logout</a>
           </li>
           <% else %>
           <li class="nav-item">

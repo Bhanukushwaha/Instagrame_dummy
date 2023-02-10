@@ -1,0 +1,47 @@
+<h3>Instagrame</h3>
+
+   <strong>posts:</strong>
+   <%= @posts.count	%>
+</p>
+
+<p>
+   <%= image_tag current_user.image.url,  style: "width: 200px; height: 200px;"%>
+</p>
+
+<p>
+   <strong>Name:</strong>
+   <%=  current_user.first_name %>
+   <%=  current_user.last_name %>
+</p>
+<!-- 
+<p>
+   <strong>Last name:</strong>
+   <%=  current_user.last_name %>
+</p>
+ -->
+
+<p>
+   <strong>Email:</strong>
+   <%=  current_user.email %>
+</p>
+<strong>Posts</strong>
+<p>
+   <% @posts.each  do |post| %>
+      <% if post.pictures.any? && post.pictures.first.image.present? %>
+         <%= link_to post_path(post.id) do %>
+            <%= image_tag post.pictures.first.image.url, style: "width: 200px; height: 200px; padding-right: 8px;" %>
+         <% end %>
+      <% else %>
+         <%= link_to post_path(post.id) do %>
+            <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style="width: 200px; height: 200px; padding-right: 8px;" />
+         <% end %>
+      <% end %>
+   <% end %>
+</p>
+
+<!-- 
+<p>
+	<strong>image:</strong>	
+	<%#= image_tag image.url, class: "rounded-circle shadow-1-strong me-3", style: "width: 60px; height: 60px;"%>
+	  
+</p> -->

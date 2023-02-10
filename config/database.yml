@@ -3,7 +3,7 @@ default: &default
   encoding: utf8
   reconnect: false
   pool: 5
-  database: commerces_dev111
+  database: commerces111
   username: postgres
   password: postgres
   host: localhost
