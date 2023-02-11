@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+<table id="myTable">
+	<thead>
+		<tr class="header">			
+			<th>First name</th>
+			<th>Last name</th>
+			<th>user name</th>
+			<th>image</th>
+			<th>followers</th>			
+		</tr>
+	</thead>
+	<tbody>
+	  <% @users.each do |user| %>
+		  <tr>				
+				<td><%= user.first_name %></td>
+				<td><%= user.last_name %></td>
+				<td><%= user.user_name %></td>
+				<td><%=  link_to  user_path(user.id) do %>
+					<%= image_tag user.image.url, style: "width: 170px; height: 150px;" %></td>
+					<% end %>
+				<td>
+					<% if Follow.find_by(user_id:current_user.id, following_id: user.id).present? %>
+					  <%= link_to 'Unfollow', unfollow_path(user) %>
+					<% else %>
+					  <%= link_to 'Follow', follow_path(user) %>
+					<% end %>
+				</td>				
+		  </tr>
+	  <% end %>
+	</tbody>
+</table>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 70%;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 12px 20px 8px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 14px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 7px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+<section style="background-color: #eee;">
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-start align-items-center">
+              <div class="small d-flex justify-content-start">
+							  <p class="d-flex align-items-center me-3">
+							   <strong>Name:</strong>
+							   <%=  @user.first_name %>
+							   <%=  @user.last_name %>
+							  </p>
+							  <p class="d-flex align-items-center me-3">
+							   <strong>Email:</strong>
+							   <%=  @user.email %>
+							  </p>
+							  <p class="d-flex align-items-center me-3">
+							   <strong>posts:</strong>
+                 <%= @user.posts.count	%>
+							  </p>
+							  <p class="d-flex align-items-center me-3">
+							   <strong>Following:</strong>
+                 <%= @user.follows.count %>
+							  </p>
+
+                <p class="d-flex align-items-center me-3">
+                 <strong>Followers:</strong>
+                 <%= Follow.where(following_id:@user.id).count %>
+                </p>                           
+              </div>
+            </div>
+              <p class="mt-3 mb-4 pb-2">
+						   <%= image_tag @user.image.url,  style: "width: 800px; height: 400px;"%>
+						  </p>						
+          </div>
+          <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+	          <div class="float-end">										
+						  <%= link_to 'Back', users_path, class: "btn btn-dark btn-rounded" %>    
+						</div>      
+            <div class="d-grid gap-2 col-6 mx-auto">
+            	<% if Follow.find_by(user_id:current_user.id, following_id: @user.id).present? %>
+							  <%= link_to 'Unfollow', unfollow_path(@user, follow_by: "show_page"), class: "btn btn-primary btn-rounded" %>
+								<% else %>
+								  <%= link_to 'Follow', follow_path(@user, follow_by: "show_page"),class:"btn btn-success btn-rounded" %>
+							<% end %>			
+						</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

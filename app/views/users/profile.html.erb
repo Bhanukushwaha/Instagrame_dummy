@@ -1,47 +1,48 @@
-<h3>Instagrame</h3>
 
-   <strong>posts:</strong>
-   <%= @posts.count	%>
-</p>
+<div class="card">  
+  <div class="card-header d-flex">
+    <div class="col-lg-3"><%= image_tag current_user.image.url, class: "rounded-circle shadow-1-strong me-3",style: "width: 90px; height: 90px;"%>     
+      <p>
+       <strong>        
+        <%= current_user.first_name %>
+        <%= current_user.last_name %>
+       </strong>
+      </p>           
+    </div>    
+    <div class="d-flex mt-4 col-md-3">
+      <p class="col-md-9">
+        <strong>posts:</strong>
+        <%= @posts.count %>
+      </p>
 
-<p>
-   <%= image_tag current_user.image.url,  style: "width: 200px; height: 200px;"%>
-</p>
+      <p class="col-md-11">
+         <strong>Following:</strong>
+         <%= current_user.follows.count %>
+      </p>
 
-<p>
-   <strong>Name:</strong>
-   <%=  current_user.first_name %>
-   <%=  current_user.last_name %>
-</p>
-<!-- 
-<p>
-   <strong>Last name:</strong>
-   <%=  current_user.last_name %>
-</p>
- -->
+      <p class="col-md-7">
+         <strong>Followers:</strong>
+         <%= Follow.where(following_id:current_user.id).count %>
+      </p>
 
-<p>
-   <strong>Email:</strong>
-   <%=  current_user.email %>
-</p>
-<strong>Posts</strong>
-<p>
-   <% @posts.each  do |post| %>
+      <p class="col-md-9">
+         <strong>Email:</strong>
+         <%=  current_user.email %>
+      </p>
+    </div>   
+  </div> 
+  <div class="card-body">    
+    <% @posts.each  do |post| %>
       <% if post.pictures.any? && post.pictures.first.image.present? %>
          <%= link_to post_path(post.id) do %>
-            <%= image_tag post.pictures.first.image.url, style: "width: 200px; height: 200px; padding-right: 8px;" %>
+            <%= image_tag post.pictures.first.image.url, style: "width: 300px; height: 300px; padding-right: 8px;" %>
          <% end %>
-      <% else %>
+        <% else %>
          <%= link_to post_path(post.id) do %>
-            <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style="width: 200px; height: 200px; padding-right: 8px;" />
+            <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar", style="width: 200px; height: 200px; padding-right: 8px;" />
          <% end %>
       <% end %>
    <% end %>
-</p>
+  </div> 
+</div>
 
-<!-- 
-<p>
-	<strong>image:</strong>	
-	<%#= image_tag image.url, class: "rounded-circle shadow-1-strong me-3", style: "width: 60px; height: 60px;"%>
-	  
-</p> -->

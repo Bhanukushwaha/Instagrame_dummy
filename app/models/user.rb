@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
    has_many :comments, dependent: :destroy
    has_many :posts, dependent: :destroy
+   has_many :follows, dependent: :destroy
     after_create :set_username
   private 
   def set_username
