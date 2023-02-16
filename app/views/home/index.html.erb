@@ -1,0 +1,179 @@
+<% @posts.each do |post|%>
+  <section style="background-color: #eee;">
+    <div class="container my-5 py-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-start align-items-center">              
+                <% if post.user.image.present? %>
+                  <%= link_to user_path(post.user.id) do %>
+                    <%= image_tag post.user.image.url, class: "rounded-circle shadow-1-strong me-3", style: "width: 60px; height: 60px;"%>
+                  <% end %>
+                <% else %>                
+                  <img class="rounded-circle shadow-1-strong me-3"
+                  src="<%= asset_path("avatar.png")%>" alt="avatar" width="60" height="60" />
+                <% end %>
+                <div class="me-5 mb-2">
+                  <h4 class="fw-bold text-primary">                  
+                     <%= post.user.first_name %>
+                     <%= post.user.last_name %>                  
+                  </h4>
+                  <p class="mb-2">
+                    Shared publicly- <%= post.created_at.strftime("%d-%b-%Y / %R") %>
+                  </p>
+                </div>              
+                <div class="d-flex mb-3">              
+                  <p class="col-md-9">
+                    <strong>Title:</strong>
+                    <%= post.title %>
+                  </p>
+                  <p class="col-md-11">
+                    <strong>Description:</strong>
+                    <%= post.description %>
+                  </p>
+                </div>
+              </div>            
+              <div class="mt-3 mb-4 pb-2">  
+                <!-- <strong >Pictures:</strong> -->
+                <%if post.pictures.present? %>
+                    <% if post.pictures.count == 1 %>
+                        <% post.pictures.each do |pic| %>
+                          <%= image_tag pic.image.url, style: "width: 700px; height: 400px;"%>
+                        <% end %>
+                      <% else %>
+                        <p class="w3-content w3-display-container">
+                          <% post.pictures.each do |pic| %>
+                            <%= image_tag pic.image.url, style: "width: 800px; height: 450px; ", class: "mySlides" %>
+                          <% end %>
+                          <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                          <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                        </p>
+                    <% end %>
+                  <% else %>
+                    <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style= "width: 800px; height: 450px; " />                
+                <%end %>
+              </div>
+              <div class="small d-flex justify-content-start">
+                <div class="like_section">
+                  <% if !Like.where(post_id: post.id, :user_id=>current_user.id).present? %>
+                    <a href="/like?post_id=<%= post.id%>" class="d-flex align-items-center me-3" data-remote="true">
+                      <i class="far fa-thumbs-up me-2"></i>
+                      <p class="mb-0">Like <small>(<%= post.likes.count%>)</small></p>
+                    </a>
+                  <% else %>
+                    <a href="/unlike?post_id=<%= post.id%>" class="d-flex align-items-center me-3" data-remote="true">
+                      <i class="far fa-thumbs-down me-2"></i>
+                      <p class="mb-0">Like<small>(<%= post.likes.count%>)</small></p>
+                    </a>
+                  <% end %>
+                </div>
+                <a href="#!" class="d-flex align-items-center me-3">
+                  <i class="far fa-comment-dots me-2"></i>
+                  <p class="mb-0" onclick="document.getElementById('id01').style.display='block'">Comment:(<b><%= post.comments.count %></b>)</p>
+                </a>
+                <a href="#!" class="d-flex align-items-center me-3">
+                  <i class="fas fa-share me-2"></i>
+                  <p class="mb-0">Share</p>                
+                </a>              
+              </div>            
+            </div>          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+      <header class="w3-container w3-blue"> 
+       <span onclick="document.getElementById('id01').style.display='none'" 
+       class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+       <h2>Instagrame comment</h2>
+      </header>
+
+      <div class="w3-bar w3-border-bottom">
+       <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'London')">Do comment</button>
+       <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Paris')">comment list</button>   
+      </div>
+
+      <div id="London" class="w3-container city">
+        <%= form_with model: [ post, post.comments.build ] do |form| %>
+          <%= form.hidden_field :user_id , value: current_user.id %>
+          <div class="w3-container" action="/action_page.php">
+            <div class="w3-section">
+              <label><b>comment :-</b></label>
+              <%= form.text_field :title , class: "form-control", id: "recipient-name"%>    
+              <%= form.submit class: "w3-button w3-block w3-green w3-section w3-padding" %>
+            </div>
+          </div>
+          <div>
+          <% post.comments.each do |comment| %>
+            <p>
+              <strong><%= comment&.user&.user_name %></strong>
+              <%= comment.title %>
+            </p>           
+          <% end %>
+        </div>   
+        <% end %>
+      </div>
+
+      <div id="Paris" class="w3-container city">
+        <div>
+          <% post.comments.each do |comment| %>
+            <p>
+              <strong><%= comment&.user&.user_name %></strong>
+              <%= comment.title %>
+            </p>
+            <p>
+              <%= link_to 'Delete', "/comments/#{comment.id}?post_id=#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </p>          
+          <% end %>
+        </div>
+      </div>
+      <div class="w3-container w3-light-grey w3-padding">
+       <button class="w3-button w3-right w3-white w3-border" 
+       onclick="document.getElementById('id01').style.display='none'">Close</button>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  document.getElementById("London").onsubmit = function(){
+    location.reload(true);
+}
+document.getElementsByClassName("tablink")[0].click();
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].classList.remove("w3-light-grey");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.classList.add("w3-light-grey");
+}
+
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    x[slideIndex-1].style.display = "block";  
+  }
+</script>
+

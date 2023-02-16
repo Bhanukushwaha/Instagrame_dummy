@@ -21,14 +21,13 @@
         <td><%= post.description %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= button_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-button w3-red w3-medium w3-round-large" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-<%= link_to 'New Post', new_post_path,class:  "btn btn-success" %>
+<%= link_to 'New Post', new_post_path,class:  "w3-button w3-green" %>
 
 <style>
 * {
@@ -67,3 +66,4 @@
   background-color: #f1f1f1;
 }
 </style>
+

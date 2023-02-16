@@ -11,7 +11,7 @@
 	</thead>
 	<tbody>
 	  <% @users.each do |user| %>
-		  <tr>				
+		  <tr>
 				<td><%= user.first_name %></td>
 				<td><%= user.last_name %></td>
 				<td><%= user.user_name %></td>
@@ -20,16 +20,15 @@
 					<% end %>
 				<td>
 					<% if Follow.find_by(user_id:current_user.id, following_id: user.id).present? %>
-					  <%= link_to 'Unfollow', unfollow_path(user) %>
+					  <%= link_to 'Unfollow', unfollow_path(user), class: "w3-button w3-red btn-rounded" %>
 					<% else %>
-					  <%= link_to 'Follow', follow_path(user) %>
-					<% end %>
+					  <%= link_to 'Follow', follow_path(user), class: "w3-button w3-green btn-rounded" %>
+					<% end %>	
 				</td>				
 		  </tr>
 	  <% end %>
 	</tbody>
 </table>
-
 
 <style>
 * {

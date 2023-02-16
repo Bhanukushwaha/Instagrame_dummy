@@ -11,9 +11,7 @@
                 <% else %>                
                <img class="rounded-circle shadow-1-strong me-3"
                 src="<%= asset_path("avatar.png")%>" alt="avatar" width="60" height="60" />
-              <% end %>
-              <!-- <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60" height="60" /> -->
+              <% end %>              
               <div>
                 <h6 class="fw-bold text-primary mb-1">
                   <p>
@@ -43,16 +41,25 @@
                 <%#= @post.user_id %>
               </p> -->
             </div>
-
             <p class="mt-3 mb-4 pb-2">  
               <!-- <strong >Pictures:</strong> -->
-              <% if @post.pictures.present? %>
-                <% @post.pictures.each do |pic| %> 
-                  <%= image_tag pic.image.url, style: "width: 700px; height: 400px; " %>
-                <% end %>
+            <% if @post.pictures.present? %>
+               <% if @post.pictures.count == 1 %>
+                  <% @post.pictures.each do |pic| %>
+                    <%= image_tag pic.image.url, style: "width: 700px; height: 400px;"%>
+                  <% end %>
                 <% else %>
+                  <div class="w3-content w3-display-container">
+                    <% @post.pictures.each do |pic| %>
+                      <%= image_tag pic.image.url, style: "width: 800px; height: 450px; ", class: "mySlides" %>
+                    <% end %>
+                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                  </div>
+              <% end %>
+              <% else %>
                   <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style= "width: 700px; height: 400px; " />                
-              <%end %>
+            <%end %>
             </p>
 
             <div class="small d-flex justify-content-start">
@@ -72,7 +79,6 @@
               <a href="#!" class="d-flex align-items-center me-3">
                 <i class="far fa-comment-dots me-2"></i>
                 <p class="mb-0" onclick="document.getElementById('id01').style.display='block'">Comment:(<b><%= @post.comments.count %></b>)</p>
-
               </a>
               <a href="#!" class="d-flex align-items-center me-3">
                 <i class="fas fa-share me-2"></i>
@@ -80,8 +86,8 @@
               </a>              
             </div>
             <div class="float-end">
-              <%= link_to 'Edit comment', edit_post_path(@post),class: "btn btn-primary btn-sm" %>
-              <%= link_to 'Back', posts_path, class: "btn btn-dark btn-rounded" %>
+              <%= link_to 'Edit comment', edit_post_path(@post),class: "w3-button w3-green btn-rounded" %>
+              <%= link_to 'Back', posts_path, class: "w3-button w3-black btn-rounded" %>
             </div>
           </div>          
         </div>
@@ -109,7 +115,7 @@
         <div class="w3-container" action="/action_page.php">
           <div class="w3-section">
             <label><b>comment :-</b></label>
-            <%= form.text_field :title , class: "form-control", id: "recipient-name"%>         
+            <%= form.text_field :title , class: "form-control", id: "recipient-name"%>    
             <%= form.submit class: "w3-button w3-block w3-green w3-section w3-padding" %>
           </div>
         </div>
@@ -121,7 +127,7 @@
           </p>           
         <% end %>
       </div>   
-      <% end %> 
+      <% end %>
     </div>
 
     <div id="Paris" class="w3-container city">
@@ -144,13 +150,10 @@
   </div>
 </div>
 
-
-
 <script>
   document.getElementById("London").onsubmit = function(){
     location.reload(true);
 }
-
 document.getElementsByClassName("tablink")[0].click();
 
 function openCity(evt, cityName) {
@@ -166,4 +169,22 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.classList.add("w3-light-grey");
 }
+
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    x[slideIndex-1].style.display = "block";  
+  }
 </script>
+

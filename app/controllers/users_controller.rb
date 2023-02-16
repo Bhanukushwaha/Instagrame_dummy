@@ -2,10 +2,24 @@ class UsersController < ApplicationController
 
    def profile
    	 @posts = current_user.posts
+     following_ids = current_user.follows.map(&:following_id)
+     @following = User.where(id: following_ids.uniq)
+     follower_ids = Follow.where(following_id:current_user.id).map(&:user_id)
+     @followers = User.where(id:follower_ids.uniq)
    end
 
    def index
      @users = User.where.not(id: current_user.id)
+   end
+
+   def following_list
+    following_ids = current_user.follows.map(&:following_id)
+    @follows = User.where(id: following_ids.uniq)
+   end
+
+   def followers_list
+    follower_ids = Follow.where(following_id:current_user.id).map(&:user_id)
+    @followers = User.where(id:follower_ids.uniq)
    end
 
    def show

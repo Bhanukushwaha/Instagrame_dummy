@@ -1,4 +1,3 @@
-
 <div class="card">  
   <div class="card-header d-flex">
     <div class="col-lg-3"><%= image_tag current_user.image.url, class: "rounded-circle shadow-1-strong me-3",style: "width: 90px; height: 90px;"%>     
@@ -7,42 +6,154 @@
         <%= current_user.first_name %>
         <%= current_user.last_name %>
        </strong>
-      </p>           
-    </div>    
+      </p>
+    </div>   
     <div class="d-flex mt-4 col-md-3">
       <p class="col-md-9">
         <strong>posts:</strong>
         <%= @posts.count %>
       </p>
-
-      <p class="col-md-11">
-         <strong>Following:</strong>
-         <%= current_user.follows.count %>
+      <p class="col-md-7" onclick="document.getElementById('id01').style.display='block'">
+        <strong>Following:</strong>
+        <%= current_user.follows.count %>
       </p>
-
-      <p class="col-md-7">
+      <p class="col-md-7" onclick="document.getElementById('id02').style.display='block'">
+        <%#= link_to followers_list_path do %>
          <strong>Followers:</strong>
          <%= Follow.where(following_id:current_user.id).count %>
+        <%# end %>
       </p>
 
       <p class="col-md-9">
-         <strong>Email:</strong>
-         <%=  current_user.email %>
+       <strong>Email:</strong>
+        <%=  current_user.email %>
       </p>
     </div>   
   </div> 
   <div class="card-body">    
     <% @posts.each  do |post| %>
       <% if post.pictures.any? && post.pictures.first.image.present? %>
-         <%= link_to post_path(post.id) do %>
-            <%= image_tag post.pictures.first.image.url, style: "width: 300px; height: 300px; padding-right: 8px;" %>
-         <% end %>
-        <% else %>
-         <%= link_to post_path(post.id) do %>
-            <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar", style="width: 200px; height: 200px; padding-right: 8px;" />
-         <% end %>
+        <%= link_to post_path(post.id) do %>
+         <%= image_tag post.pictures.first.image.url, style: "width: 300px; height: 300px; padding-right: 8px;" %>
+        <% end %>
+      <% else %>
+        <%= link_to post_path(post.id) do %>
+         <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar", style="width: 200px height: 200px; padding-right: 8px;" />
+        <% end %>
       <% end %>
-   <% end %>
+    <% end %>
   </div> 
 </div>
 
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+    <header class="w3-container w3-blue"> 
+      <span onclick="document.getElementById('id01').style.display='none'" 
+      class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+      <h2>Instagrame following</h2>
+    </header>
+    <div class="w3-bar w3-border-bottom">
+     <!-- <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'London')">Do comment</button>
+     <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Paris')">comment list</button>  -->  
+    </div>
+    <div id="Paris" class="w3-container city">
+      <table  id="myTable">
+        <tr class="header">
+          <th>Image</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>email</th>
+          <th>Unfollow</th>
+        </tr>
+        <tbody>
+          <% @following.each do |user| %>
+            <tr>
+              <td><%= image_tag user.image.url,class: "rounded-circle shadow-1-strong me-3",  style: "width: 60px; height: 60px;"%></td>
+              <td><%= user.first_name %></td>
+              <td><%= user.last_name %></td>
+              <td><%= user.email %></td>
+              <td><%= link_to 'Unfollow', unfollow_path(user, follow_by: "show_page"),class: "w3-button w3-red w3-padding-small w3-round-large " %>               
+              </td>                
+            </tr>
+          <% end %>
+        </tbody>
+      </table> 
+    </div>
+    <div class="w3-container w3-light-grey w3-padding">
+     <button class="w3-button w3-right w3-white w3-border" 
+     onclick="document.getElementById('id01').style.display='none'">Close</button>
+    </div>
+  </div>
+</div>
+<div id="id02" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+    <header class="w3-container w3-blue"> 
+      <span onclick="document.getElementById('id02').style.display='none'" 
+      class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+      <h2>Instagrame followers</h2>
+    </header>    
+    <div id="London" class="w3-container city">
+      <table  id="myTable">
+        <tr class="header">
+          <th>Image</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+        </tr>
+        <tbody>
+          <% @followers.each do |user| %>
+            <tr>
+              <td><%= image_tag user.image.url,class: "rounded-circle shadow-1-strong me-3",  style: "width: 60px; height: 60px;"%></td>
+              <td><%= user.first_name %></td>
+              <td><%= user.last_name %></td>
+              <td><%= user.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>    
+    <div class="w3-container w3-light-grey w3-padding">
+     <button class="w3-button w3-right w3-white w3-border" 
+     onclick="document.getElementById('id02').style.display='none'">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 70%;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 12px 20px 8px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 14px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 7px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
