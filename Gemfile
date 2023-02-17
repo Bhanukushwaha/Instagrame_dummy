@@ -60,3 +60,4 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem "letter_opener", group: :development
 gem 'friendly_id'
+gem 'rails-social-share-button'

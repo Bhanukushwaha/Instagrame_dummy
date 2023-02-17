@@ -19,9 +19,16 @@
         <td><%= post.user.user_name %></td>
         <td><%= post.title %></td>        
         <td><%= post.description %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= button_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-button w3-red w3-medium w3-round-large" %></td>
+        <td><%= link_to 'Show', post, class: "w3-button w3-blue w3-padding-small" %></td>        
+        <td>
+          <div class="w3-dropdown-hover">
+            <button class="w3-button w3-padding-small">Dropdown</button>
+            <div class="w3-dropdown-content w3-bar-block w3-card">              
+              <a href="#"><%= link_to 'Edit', edit_post_path(post), class: "w3-bar-item w3-button" %></a>
+              <a href="#"><%= button_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-bar-item w3-button" %></a>
+            </div>
+          </div> 
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -23,13 +23,12 @@
          <%= Follow.where(following_id:current_user.id).count %>
         <%# end %>
       </p>
-
       <p class="col-md-9">
        <strong>Email:</strong>
         <%=  current_user.email %>
       </p>
-    </div>   
-  </div> 
+    </div>  
+  </div>
   <div class="card-body">    
     <% @posts.each  do |post| %>
       <% if post.pictures.any? && post.pictures.first.image.present? %>
