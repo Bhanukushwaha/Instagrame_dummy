@@ -1,5 +1,4 @@
 class UsersController < ApplicationController 
-
    def profile
    	 @posts = current_user.posts
      following_ids = current_user.follows.map(&:following_id)
