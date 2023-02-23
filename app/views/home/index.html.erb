@@ -23,12 +23,12 @@
                     Shared publicly- <%= post.created_at.strftime("%d-%b-%Y / %R") %>
                   </p>
                 </div>              
-                <div class="d-flex mb-3">              
-                  <p class="col-md-9">
+                <div class="d-flex ">              
+                  <p class="col-md-5">
                     <strong>Title:</strong>
                     <%= post.title %>
                   </p>
-                  <p class="col-md-11">
+                  <p class="col-md-9">
                     <strong>Description:</strong>
                     <%= post.description %>
                   </p>
@@ -39,19 +39,19 @@
                 <%if post.pictures.present? %>
                     <% if post.pictures.count == 1 %>
                         <% post.pictures.each do |pic| %>
-                          <%= image_tag pic.image.url, style: "width: 700px; height: 400px;"%>
+                          <%= image_tag pic.image.url, style: "width: 100%; height: 400px;"%>
                         <% end %>
                       <% else %>
                         <p class="w3-content w3-display-container">
                           <% post.pictures.each do |pic| %>
-                            <%= image_tag pic.image.url, style: "width: 800px; height: 450px; ", class: "mySlides" %>
+                            <%= image_tag pic.image.url, style: "width: 100%; height: 450px; ", class: "mySlides" %>
                           <% end %>
                           <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                           <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                         </p>
                     <% end %>
                   <% else %>
-                    <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style= "width: 800px; height: 450px; " />                
+                    <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar" style= "width:30%; height: 450px; " />                
                 <%end %>
               </div>
               <div class="small d-flex justify-content-start">

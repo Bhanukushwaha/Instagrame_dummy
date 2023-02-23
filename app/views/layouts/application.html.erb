@@ -13,60 +13,30 @@
       rel="stylesheet"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  </head>
-  <style type="text/css">
-    .nav-link:hover{
-      background-color: black;
-      color: white; 
-      transition: 1s;
-    }
-  </style>
+  </head>  
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/"><%= image_tag asset_path("Instagram-Icon.png"), style: "width: 30px; height: 30px;"%> Instagrame</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li> -->
-        <li class="nav-item">
-          <a class="nav-link" href="/users">Users</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/posts">Posts</a> 
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/pictures">Pictures</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <ul class="navbar-nav me-auto mb-9 mb-lg-0">
-          <% if user_signed_in? %>
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile(<%= current_user.user_name %>)</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/sign_out">Logout</a>
-          </li>
-          <% else %>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/sign_in">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/sign_up">Register</a>
-          </li>
-          <% end %>
-        </ul>
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+    <div class="navbar  w3-container">
+      <div class="w3-bar w3-navbar-light bg-light w3-padding">
+        <a class="w3-bar-item" href="/"><%= image_tag asset_path("Instagram-Icon.png"), style: "width: 30px; height: 30px;"%> Instagrame</a>
+        <a href="/users" class="w3-bar-item w3-button">Users</a>
+        <a href="/posts" class="w3-bar-item w3-button">Posts</a>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">Dropdown</button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="/pictures" class="w3-bar-item w3-button">Pictures</a>            
+          </div>
+        </div>
+        <div class="w3-right">
+        <% if user_signed_in? %>
+          <a class="w3-bar-item w3-button" href="/profile">Profile(<%= current_user.user_name %>)</a>
+          <a class="w3-bar-item w3-button" href="/users/sign_out">Logout</a>
+        <% else %>
+          <a class="w3-bar-item w3-button" href="/users/sign_in">Login</a>
+          <a class="w3-bar-item w3-button" href="/users/sign_up">Register</a>
+        <% end %>       
+        </div>
+      </div>      
     </div>
-  </div>
-  </nav>    
     <div  class="container">
      <%= yield %>
     </div>
