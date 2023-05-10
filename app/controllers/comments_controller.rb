@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
-
   # GET /comments or /comments.json
   def index
     @comments = Comment.all
@@ -23,10 +22,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @post = Post.friendly.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
-  
-    # UserMailer.with(user: @user).welcome_email.deliver_later
-    render post_path(@post)    
+    @comment = @post.comments.create(comment_params)  
+    # render post_path(@post)
+    # respond_to do |format| 
+    #   format.js
+    # end      
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
@@ -42,16 +42,17 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
-  def destroy
+  # DELETE /comments/1 or /comments/1.json 
+
+  def destroy    
     @post = Post.find(params[:post_id])
     @comment.destroy
-    redirect_to post_path(@post), status: :see_other
-
-    # respond_to do |format|
-    #   format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
-    #   format.json { head :no_content }
-    # end
+    # redirect_to post_path(@post), status: :see_other
+    respond_to do |format|
+      format.html { redirect_to post_path(@post), notice: "Post was successfully destroyed." }
+      format.json { head :no_content }
+      format.js
+    end    
   end
 
   private

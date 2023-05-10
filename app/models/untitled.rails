@@ -46,8 +46,6 @@
      <%= current_user.email%>
     <% end %>
  <%end%>
-
-
 <%= form_with model: [ @post, @post.comments.build ] do |form| %>
 <%#= form.hidden_field  ,nil ,:value => @post.id%>
   <p>
@@ -161,6 +159,7 @@
             <% end %>
           </div>
         </div>
+        
 
       <%= form_with model: [ @post, @post.comments.build ] do |form| %>
         <div class="modal-body">          
@@ -177,3 +176,15 @@
     </div>
   </div>
 </div>
+
+<div>
+  <% post.comments.each do |comment| %>
+    <p>
+      <strong><%= comment&.user&.user_name %></strong>
+      <%= comment.title %>
+    </p>           
+  <% end %>
+</div> 
+<div class="like_section">
+                  <%= render :partial =>  "like_unlike_section", locals: {post: post} %>
+                </div>

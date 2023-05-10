@@ -1,0 +1,6 @@
+<% @post&.comments&.each do |comment| %>
+  <p>
+    <strong><%= comment&.user&.user_name %></strong>
+    <%= comment.title %>
+  </p>           
+<% end %>

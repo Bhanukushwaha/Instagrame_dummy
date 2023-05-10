@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
   
   # GET /posts or /posts.json
   def index
@@ -31,26 +31,22 @@ class PostsController < ApplicationController
     end   
   end
 
-
   def unlike
     @post = Post.find(params[:post_id])
     @like = Like.where(:post_id=>params[:post_id], :user_id=>current_user.id).first
     #@like = @post.likes.first
-    @like = @like.destroy
+    @like.destroy
     # redirect_to post_path(@post)
     respond_to do |format|
       format.js
     end
   end
 
-
-
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     respond_to do |format|
-
       if @post.save
        images = params[:post][:image]
         if images.present?

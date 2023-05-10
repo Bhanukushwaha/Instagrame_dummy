@@ -1,1 +1,1 @@
-$(".like_section").html("<%= escape_javascript(render 'like_unlike_section' )%>");
+$(".like_section_<%= @post.id %>").html("<%= escape_javascript(render 'like_unlike_section' )%>");

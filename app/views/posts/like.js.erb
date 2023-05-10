@@ -1,2 +1,2 @@
 // alert("like post");
-$(".like_section").html("<%= j render partial: 'posts/like_unlike_section'%>");
+$(".like_section_<%= @post.id %>").html("<%= j render partial: 'posts/like_unlike_section'%>");

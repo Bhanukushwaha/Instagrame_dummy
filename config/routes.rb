@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   root 'home#index'
-  devise_for :users
+  devise_for :users, controllers: {sessions: "users/sessions", :registrations => "users/registrations", :passwords => "users/passwords"}
   get 'like' =>'posts#like', as: :like
   get 'unlike' =>'posts#unlike', as: :unlike
   delete "/comments/:id", to: "comments#destroy"
   get 'follow/:following_id' => 'users#follow' , as: :follow
   get 'unfollow/:following_id' => 'users#unfollow', as: :unfollow
-
 
   resources :posts do  
     resources :likes

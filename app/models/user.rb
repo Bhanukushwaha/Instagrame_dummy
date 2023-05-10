@@ -10,6 +10,7 @@ class User < ApplicationRecord
    has_many :posts, dependent: :destroy
    has_many :follows, dependent: :destroy
     after_create :set_username
+    
   private 
   def set_username
    user_na = self.email.split('@').first

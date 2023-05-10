@@ -1,0 +1,3 @@
+alert("like post");
+// $(".likes_section").html("<%= j render partial: 'like_unlike_section'%>");	
+$('.likes_section').html("<%= escape_javascript render 'home/like_unlike_section' %>");

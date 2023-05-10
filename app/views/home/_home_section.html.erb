@@ -1,0 +1,12 @@
+<div>
+  <% post&.comments&.each do |comment| %>
+    <p>
+      <strong><%= comment&.user&.user_name %></strong>
+      <%= comment.title %>
+    </p>  
+    <p>
+      <%= link_to 'Delete', "/comments/#{comment.id}?post_id=#{post.id}", method: :delete, data: { confirm: 'Are you sure?' }, :remote => true %>
+    </p>  
+              
+  <% end %>
+</div>

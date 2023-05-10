@@ -30,7 +30,7 @@
                   <%= @post.description %>
                 </p>
               </div>
-            </div>            
+            </div>
             <p class="mt-3 mb-4 pb-2">  
               <!-- <strong >Pictures:</strong> -->
             <% if @post.pictures.present? %>
@@ -53,7 +53,7 @@
             </p>
 
             <div class="small d-flex justify-content-start">
-              <div class="like_section">
+              <div class="like_section_<%= @post.id %>">
                 <% if !Like.where(post_id: @post.id, :user_id=>current_user.id).present? %>
                   <a href="/like?post_id=<%= @post.id%>" class="d-flex align-items-center me-3" data-remote="true">
                     <i class="far fa-thumbs-up me-2"></i>
@@ -85,7 +85,6 @@
     </div>
   </div>
 </section>
-
 <div id="id01" class="w3-modal">
   <div class="w3-modal-content w3-card-4 w3-animate-zoom">
     <header class="w3-container w3-blue"> 
@@ -98,40 +97,26 @@
      <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'London')">Do comment</button>
      <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Paris')">comment list</button>   
     </div>
-
-    <div id="London" class="w3-container city">
-      <%= form_with model: [ @post, @post.comments.build ] do |form| %>
+    <div id="London" class=" w3-container city">            
+      <%= form_with model: [ @post, @post.comments.build ],remote: true do |form| %>
         <%= form.hidden_field :user_id , value: current_user.id %>
         <div class="w3-container" action="/action_page.php">
           <div class="w3-section">
             <label><b>comment :-</b></label>
-            <%= form.text_field :title , class: "form-control", id: "recipient-name"%>    
+            <%= form.text_field :title , class: "form-control", id: "recipient-name",:required => true%>
             <%= form.submit class: "w3-button w3-block w3-green w3-section w3-padding" %>
           </div>
-        </div>
-        <div>
-        <% @post.comments.each do |comment| %>
-          <p>
-            <strong><%= comment&.user&.user_name %></strong>
-            <%= comment.title %>
-          </p>           
-        <% end %>
-      </div>   
+        </div>   
+        <div class="comm_section">
+          <%= render :partial =>  "/comments/comment_section", post: @post %>
+        </div>         
       <% end %>
     </div>
 
     <div id="Paris" class="w3-container city">
-      <div>
-        <% @post.comments.each do |comment| %>
-          <p>
-            <strong><%= comment&.user&.user_name %></strong>
-            <%= comment.title %>
-          </p>
-          <p>
-            <%= link_to 'Delete', "/comments/#{comment.id}?post_id=#{@post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
-          </p>          
-        <% end %>
-      </div>
+      <div class="delete_section">
+        <%= render :partial =>  "/comments/destroy_section", post: @post %>
+      </div> 
     </div>
     <div class="w3-container w3-light-grey w3-padding">
      <button class="w3-button w3-right w3-white w3-border" 
@@ -141,9 +126,9 @@
 </div>
 
 <script>
-  document.getElementById("London").onsubmit = function(){
-    location.reload(true);
-}
+//   document.getElementById("London").onsubmit = function(){
+//     location.reload(true);
+// }
 document.getElementsByClassName("tablink")[0].click();
 
 function openCity(evt, cityName) {

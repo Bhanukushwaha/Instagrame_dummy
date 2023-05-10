@@ -1,5 +1,5 @@
 class Post < ApplicationRecord	
-	attr_accessor :image  
+	attr_accessor :image
 	extend FriendlyId
     friendly_id :title, use: :slugged
 	has_many :pictures, dependent: :destroy
