@@ -11,13 +11,19 @@ Rails.application.routes.draw do
     resources :likes
     resources :comments
   end
-   resources :pictures
+   resources :pictures do
+    member do 
+      get :edit_pictures
+    end 
+  end
    
    get 'profile' => 'users#profile', as: :profile
    get 'users' => 'users#index', as: :users
    get "/users/:id" => "users#show", as: :user
    get 'followers_list' => "users#followers_list", as: :followers_list
    get 'following_list' => "users#following_list", as: :following_list
+   get '/reset_password', to: "users#reset_password"
+   patch '/users/:id', to: 'users#password_update'
    
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

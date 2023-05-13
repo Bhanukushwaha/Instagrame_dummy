@@ -8,30 +8,7 @@
 <p>
   <strong>Image:</strong>
  <%= image_tag @picture.image.url, style: "width: 400px; height: 250px; " %>
-</p>          
+</p>
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>
-
-
-<a href="#" class="" data-toggle="modal" data-target="#editModal">dfdfddf</a>
-
-
-
-<div class="modal fade" id="editModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-     <div class="modal-content">
-      <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal">&times;</button>
-       <h4 class="modal-title">Edit Company</h4>
-      </div>
-      <div class="modal-body">
-
-      </div>
-      <div class="modal-footer">
-       <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-     </div>
-    </div>
-</div>
-

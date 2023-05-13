@@ -19,8 +19,12 @@ class PicturesController < ApplicationController
   def edit
   end
 
+  def edit_pictures
+  render 'pictures/edit_pictures'
+ end
+
   # POST /pictures or /pictures.json
-  def create  
+  def create
      # @post = Post.find(params[:post_id])
      # @picture = @post.pictures.create(picture_params)
     @picture = Picture.new(picture_params)
@@ -36,7 +40,6 @@ class PicturesController < ApplicationController
       end
     end
   end
-
   # PATCH/PUT /pictures/1 or /pictures/1.json
   def update
     respond_to do |format|
@@ -53,7 +56,6 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1 or /pictures/1.json
   def destroy
     @picture.destroy
-
     respond_to do |format|
       format.html { redirect_to pictures_url, notice: "Picture was successfully destroyed." }
       format.json { head :no_content }

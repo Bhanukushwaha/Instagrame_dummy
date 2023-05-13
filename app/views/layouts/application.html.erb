@@ -17,19 +17,19 @@
   <body>
     <style type="text/css">
       body{
-        background-image:url('/assets/image7.jpg'); 
-        background-size : cover;        
-      }       
+        /*background-image:url('/assets/image7.jpg'); 
+        background-size : cover;  */      
+      }
     </style>
     <div class="navbar  w3-container">
       <div class="w3-bar w3-navbar-light bg-light w3-padding">
-        <a class="w3-bar-item" href="/"><%= image_tag asset_path("Instagram-Icon.png"), style: "width: 30px; height: 30px;"%> Instagrame</a>             
+        <a class="w3-bar-item" href="/"><%= image_tag asset_path("Instagram-Icon.png"), style: "width: 30px; height: 30px;"%> Instagrame</a>         
         <a href="/users" class="w3-bar-item w3-button">Users</a>
         <a href="/posts" class="w3-bar-item w3-button">Posts</a>
         <div class="w3-dropdown-hover">
           <button class="w3-button">Dropdown</button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
-            <a href="/pictures" class="w3-bar-item w3-button">Pictures</a>            
+            <a href="/pictures" class="w3-bar-item w3-button">Pictures</a>         
           </div>
         </div>
         <div class="w3-right">
@@ -44,8 +44,7 @@
         </div>
       </div>
     </div>
-
-    <div  class="container"> 
+    <div  class="container">
     <div class="FlashNotice">
       <% flash.each do |key, value| %>
       <div class="<%= flash_class(key) %> fade in">
@@ -53,8 +52,9 @@
         <%= value %>
       </div>
       <% end %>
-    </div>        
-     <%= yield %>   
+    </div>
+     <%= yield %>
     </div>
   </body>
 </html>
+

@@ -50,8 +50,7 @@ class PostsController < ApplicationController
       if @post.save
        images = params[:post][:image]
         if images.present?
-          images.each do |img|
-      
+          images.each do |img|      
             picture = Picture.new(image: img, post_id: @post.id)
             #picture = @post.pictures.new(image: params[:post][:image])
             picture.save
@@ -91,21 +90,21 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-    respond_to do |format|
+    respond_to do |format|  
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.friendly.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.friendly.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title, :user_id, :description, :image)
-    end
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :user_id, :description, :image)
+  end
 end
   

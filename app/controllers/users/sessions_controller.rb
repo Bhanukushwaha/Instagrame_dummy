@@ -15,30 +15,25 @@ module Users
           @valid = true
           sign_in(user)
         else
-          @error = "Your entered incorrect password"
+          @error = "Your entered incorrect password?"
         end
       else
         @error = "User Not Found"
         respond_to do |format|
-          format.js
+          format.js             
         end
-      end
-      # super
-      # respond_to do |format|
-      #   format.js
-      # end
-      # render '/users/sign_in'
+      end     
     end
 
     # DELETE /resource/sign_out
-    def destroy
+    def destroy 
       super
     end
 
     protected
-    # If you ha/ve extra params to permit, append them to the sanitizer.
-    def configure_sign_in_params
-      devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-    end
+      # If you ha/ve extra params to permit, append them to the sanitizer.
+      def configure_sign_in_params
+        devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+      end
   end
 end

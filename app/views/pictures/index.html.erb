@@ -17,14 +17,30 @@
         <td><%= picture.post_id %></td>
         <td><%= picture.image %></td>
         <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
+        <td><%= link_to 'Edit', edit_picture_path(picture),:remote => true,'data-toggle' => "modal", 'data-target' => '#editModal' %></td>        
         <td><%= button_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'New Picture', new_picture_path %>
 
+
+
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <h4 class="modal-title">Edit Company</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+       <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+     </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController 
+  skip_before_action :authenticate_user!, :only => [:reset_password, :password_update]
    def profile
    	 @posts = current_user.posts
      following_ids = current_user.follows.map(&:following_id)
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
    end
 
    def show
-    @user = User.find(params[:id])
+    @user = User.find_by(params[:id])
    end
 
    def follow
@@ -47,6 +48,22 @@ class UsersController < ApplicationController
       redirect_to user_path(params[:following_id]), notice: "successfully Unfollowed."
     else
       redirect_to users_path, notice: "successfully Unfollowed."
+    end
+  end
+
+  def reset_password
+    @user = User.find_by_id(params[:id])
+  end
+
+  def password_update
+    @user = User.find(params[:id])
+    if (params[:user][:password] == params[:user][:password_confirmation])
+      @user.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+      respond_to do |format|
+        format.js
+      end 
+    else
+      @error = "password not match"
     end
   end
 end
