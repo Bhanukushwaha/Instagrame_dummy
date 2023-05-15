@@ -1,13 +1,10 @@
 <% resource = User.new %>
-  <div id="sign_up_error" style="color: green;" ></div>
 <%= form_for(resource, as: resource_name,remote: true, url: registration_path(resource_name)) do |f| %>
- <%= render "devise/shared/error_messages", resource: resource %>
-  
+  <%= render "devise/shared/error_messages", resource: resource %>  
   <div class="w3-container" action="/action_page.php">
     <div class="w3-section">
       <label><b>First Name</b></label>
-      <%= f.text_field :first_name, autofocus: true, autocomplete: "firstname", placeholder: "FirstName",type: "text", :required => true, class: "w3-input w3-border w3-margin-bottom"%>
-      
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "firstname", placeholder: "FirstName",type: "text", :required => true, class: "w3-input w3-border w3-margin-bottom"%>      
       <label><b>Last Name</b></label>
       <%= f.text_field :last_name, autofocus: true, autocomplete: "lastname", placeholder: "Last Name",type: "text",:required => true , class: "w3-input w3-border w3-margin-bottom"%>
 
@@ -15,12 +12,14 @@
       <%= f.file_field :image, :required => true  %><br>
 
       <label><b>Email</b></label>
+      <div id="email_error" style="color: green;" ></div>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email",type: "text",:required => true , class: "w3-input w3-border w3-margin-bottom" %>
                           
-      <label><b>Password</b></label> 
+      <label><b>Password</b></label>
+      <div id="sign_up_error" style="color: green;" ></div>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
+      <% end %><br/>
       <%= f.password_field :password, autocomplete: "new-password", type: "password", placeholder: "Enter Password",:required => true , class: "w3-input w3-border" %>
 
       <label><b>password_confirmation</b></label>

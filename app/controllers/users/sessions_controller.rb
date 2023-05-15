@@ -14,11 +14,11 @@ module Users
         if user.valid_password?(params[:user][:password])
           @valid = true
           sign_in(user)
-        else
-          @error = "Your entered incorrect password?"
+        enable_extension
+          @error = {message: "Your entered incorrect password?", email: true}
         end
       else
-        @error = "User Not Found"
+        @error = {message: "User Not Found", email: false}
         respond_to do |format|
           format.js             
         end

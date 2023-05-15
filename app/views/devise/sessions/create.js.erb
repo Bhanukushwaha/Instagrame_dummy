@@ -1,8 +1,11 @@
 $(".loginform").html("<%= escape_javascript (render 'devise/sessions/form' )%>");
-
 // $(".loginform").html("<%= j render partial: 'devise/sessions/form'  %>");
 <% if @error.present? %>
-	document.getElementById("sign_in_error").innerHTML = "<%= @error %>"
+	<% if @error[:email] %>
+		document.getElementById("password_in_error").innerHTML = "<%= @error[:message] %>"
+	<% else %>
+		document.getElementById("sign_in_error").innerHTML = "<%= @error[:message] %>"
+	<% end %>
 <% else %>
 	window.location.href = "/"
 <% end %>

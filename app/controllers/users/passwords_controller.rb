@@ -10,9 +10,10 @@ class Users::PasswordsController < Devise::PasswordsController
     user= User.find_by_email(params[:user][:email])
     if user.present?
       UserMailer.with(user: user).welcome_email.deliver_later
+      @error = "User forword successfully?"
       # @error = "user have a allready present?"
     else
-      @error = "User Not Found"
+      @error = "User Not Found?"
       respond_to do |format|
         format.js
       end

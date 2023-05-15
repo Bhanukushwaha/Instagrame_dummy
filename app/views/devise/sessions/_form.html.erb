@@ -4,14 +4,15 @@
   <% end %>
 </div>
 <% resource = User.new %>
-<div id="sign_in_error" style="color: green"></div>
 <%= form_for(resource, as: resource_name,remote: true, url: session_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class=" w3-container" action="/action_page.php">
     <div class="w3-section">
       <label><b>Enter Your Email</b></label>
+      <div id="sign_in_error" style="color: green"></div>           
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your Email",type: "text", class: "w3-input w3-border w3-margin-bottom",:required => true%>        
-      <label><b>Password</b></label>            
+      <label><b>Password</b></label>
+      <div id="password_in_error" style="color: green"></div> 
       <%= f.password_field :password, autocomplete: "current-password", type: "password", placeholder: "Enter Password", class: "w3-input w3-border",:required => true %>
       <%= f.submit "Log in" , class: "w3-button w3-block w3-green w3-section w3-padding"%>
 

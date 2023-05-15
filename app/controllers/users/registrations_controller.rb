@@ -9,10 +9,10 @@ module Users
     def create
       @user = User.find_by_email(params[:user][:email])
       if @user.present?
-        @error = "User is already present"
+        @error = {message: "User is already present", email: true}
       else        
          if (params[:user][:password] != params[:user][:password_confirmation])
-          @error = "password not mach"
+          @error = {message: "password does not match?", email: false }
          else
           user = User.new(first_name: params[:user][:first_name],last_name: params[:user][:last_name],image: params[:user][:image], email: params[:user][:email],password: params[:user][:password],password_confirmation: params[:user][:password_confirmation])
             if user.save
