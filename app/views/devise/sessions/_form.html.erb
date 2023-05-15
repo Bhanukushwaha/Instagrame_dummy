@@ -4,9 +4,8 @@
   <% end %>
 </div>
 <% resource = User.new %>
-<div id="sign_in_error"></div>
+<div id="sign_in_error" style="color: green"></div>
 <%= form_for(resource, as: resource_name,remote: true, url: session_path(resource_name)) do |f| %>
-
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class=" w3-container" action="/action_page.php">
     <div class="w3-section">
@@ -29,5 +28,4 @@
  <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
  <%#= link_to "Forgot your password?", new_password_path(resource_name),class: "w3-right w3-padding w3-hide-small" %>
  <button class="w3-right w3-padding w3-bar-item w3-button" onclick="openCity(event, 'Paris')">Forget password</button>
-</div>
 </div>

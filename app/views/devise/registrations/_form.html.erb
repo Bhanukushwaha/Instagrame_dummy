@@ -1,10 +1,5 @@
-<div class="FlashNotice">
-  <% flash.each do |key, value| %>
-    <%= value %>  
-  <% end %>
-</div>
 <% resource = User.new %>
-  <div id="sign_up_error"></div>
+  <div id="sign_up_error" style="color: green;" ></div>
 <%= form_for(resource, as: resource_name,remote: true, url: registration_path(resource_name)) do |f| %>
  <%= render "devise/shared/error_messages", resource: resource %>
   

@@ -1,4 +1,8 @@
-// $(".login_form").html("<%= escape_javascript (render 'devise/sessions/form' )%>");
+$(".loginform").html("<%= escape_javascript (render 'devise/sessions/form' )%>");
 
-document.getElementById("sign_in_error").innerHTML = "<%= @error %>"
-$(".login_form").html("<%= j render partial: 'devise/sessions/form'  %>");
+// $(".loginform").html("<%= j render partial: 'devise/sessions/form'  %>");
+<% if @error.present? %>
+	document.getElementById("sign_in_error").innerHTML = "<%= @error %>"
+<% else %>
+	window.location.href = "/"
+<% end %>

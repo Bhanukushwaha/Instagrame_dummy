@@ -13,16 +13,15 @@
     </div>
     <div id="London" class=" w3-container city">
     	<div class="loginform">    		
-    	 <h3 style="text-align: center;">Sing_in</h3>    	  
        <%= render :partial =>  "devise/sessions/form", locals: { user: @user} %>
     	</div>
+    </div>
       <div id="Paris" class="w3-container city">     
        <%= render :partial =>  "devise/passwords/form", user: @user %>
       </div>
       <div id="Tokyo" class=" Sign_upform w3-container city">
-        <%= render :partial =>  "devise/registrations/form", locals: { user: @user} %>
+        <%= render :partial =>  "devise/registrations/form", locals: { user: @user}%>
       </div>
-    </div>
   </div>
 </div>
 

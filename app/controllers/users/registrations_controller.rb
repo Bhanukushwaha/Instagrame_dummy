@@ -2,7 +2,6 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
-
     def new
       super
     end
@@ -13,7 +12,7 @@ module Users
         @error = "User is already present"
       else        
          if (params[:user][:password] != params[:user][:password_confirmation])
-          @error = "password no mach"
+          @error = "password not mach"
          else
           user = User.new(first_name: params[:user][:first_name],last_name: params[:user][:last_name],image: params[:user][:image], email: params[:user][:email],password: params[:user][:password],password_confirmation: params[:user][:password_confirmation])
             if user.save

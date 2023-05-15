@@ -1,3 +1,8 @@
 // document.getElementById("sign_up_error").innerHTML = "<%= @error %>"
-document.getElementById("sign_up_error").innerHTML = "<%= @error %>"
-// $(".Sign_upform").html("<%= j render partial: 'devise/registrations/form' %>");	
+$(".Signupform").html("<%= j render partial: 'devise/registrations/form' %>");	
+<% if @error.present? %>
+	document.getElementById("sign_up_error").innerHTML = "<%= @error %>"
+<% else %>
+	window.location.href = "/"
+<% end %>
+
