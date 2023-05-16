@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+	skip_before_action :authenticate_user!, :only => [:home_modle]
 	def index		
 		# following_id = current_user.follows.map(&:following_id)
 		# follow_id = Follow.where(id: following_id)
@@ -8,4 +9,9 @@ class HomeController < ApplicationController
 		posts_ids = User.where(id: following_account_ids).eager_load(:posts).pluck('posts.id').uniq
 	  @posts = Post.where(id: posts_ids ).order("created_at DESC")#.paginate(page: params[:page], per_page: 10)
 	end
+	 def home_modle
+	 	respond_to do |format|      
+      format.js {}
+    end	 	
+	 end
 end

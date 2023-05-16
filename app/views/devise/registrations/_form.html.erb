@@ -1,5 +1,5 @@
 <% resource = User.new %>
-<%= form_for(resource, as: resource_name,remote: true, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource,remote: true, url: registration_path(resource)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>  
   <div class="w3-container" action="/action_page.php">
     <div class="w3-section">
@@ -12,11 +12,11 @@
       <%= f.file_field :image, :required => true  %><br>
 
       <label><b>Email</b></label>
-      <div id="email_error" style="color: green;" ></div>
+      <div id="email_error" style="color: red;" ></div>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email",type: "text",:required => true , class: "w3-input w3-border w3-margin-bottom" %>
                           
       <label><b>Password</b></label>
-      <div id="sign_up_error" style="color: green;" ></div>
+      <div id="sign_up_error" style="color: red;" ></div>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br/>

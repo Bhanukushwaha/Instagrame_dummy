@@ -14,7 +14,7 @@ module Users
         if user.valid_password?(params[:user][:password])
           @valid = true
           sign_in(user)
-        enable_extension
+        else
           @error = {message: "Your entered incorrect password?", email: true}
         end
       else
@@ -22,7 +22,7 @@ module Users
         respond_to do |format|
           format.js             
         end
-      end     
+      end
     end
 
     # DELETE /resource/sign_out

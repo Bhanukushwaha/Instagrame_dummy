@@ -38,7 +38,9 @@
             <a class="w3-bar-item w3-button" href="/users/sign_out" >Logout</a>
           <% else %>
             <!-- <a class="w3-bar-item w3-button" href="/users/sign_in" >Login</a> -->
-            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button">Login</a>
+            <!-- <a href="#" onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button">Login</a> -->
+            <%= link_to "Login", home_modle_path, remote: true, class: "w3-bar-item w3-button" %>
+            <a href="/"></a>
             <!-- <a class="w3-bar-item w3-button" href="/users/sign_up">Register</a> -->
           <% end %>
         </div>
@@ -53,6 +55,7 @@
       </div>
       <% end %>
     </div>
+    <div id="remote-container"></div>
      <%= yield %>
     </div>
   </body>

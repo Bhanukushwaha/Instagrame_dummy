@@ -1,0 +1,58 @@
+
+<div class="w3-container">
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-right">
+      <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        <h2>Modal Header</h2>
+      </header>
+      <div class="w3-container">
+        <h2>hjfsklfjsdklfjsdkl</h2>
+        <%= form_with(model: @picture, local: true) do |form| %>
+          <% if @picture.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+
+              <ul>
+                <% @picture.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :post_id %>
+            <%= form.select :post_id, Post.all.map { |e| [e.id]} %>
+          </div>
+
+          <div class="field">
+            <%= form.label :image %>
+            <%= form.file_field :image,:onchange => "showimagepreview(this)",:class=>"img_file"  %><br>
+             <img id="imgprvw" style="width: 200px; height: 94px; " />
+          </div>
+
+          <div class="actions">
+            <%= form.submit %>
+          </div>
+        <% end %>
+      </div>
+      <footer class="w3-container w3-teal">
+        <p>Modal Footer</p>
+      </footer>
+    </div>
+  </div>
+</div>
+<script>
+  function showimagepreview(input) {
+    if (input.files && input.files[0]) {
+    var filerdr = new FileReader();
+    filerdr.onload = function(e) {
+    $('#imgprvw').attr('src', e.target.result);
+    }
+    filerdr.readAsDataURL(input.files[0]);
+    }
+    $('.image_upload').submit();
+  }
+</script>

@@ -5,12 +5,12 @@
         <div class="col-md-12 col-lg-10 col-xl-8">
           <div class="card">
             <div class="card-body">
-              <div class="d-flex flex-start align-items-center">              
+              <div class="d-flex flex-start align-items-center">     
                 <% if post.user.image.present? %>
                   <%= link_to user_path(post.user.id) do %>
                     <%= image_tag post.user.image.url, class: "rounded-circle shadow-1-strong me-3", style: "width: 60px; height: 60px;"%>
                   <% end %>
-                <% else %>                
+                <% else %>
                   <img class="rounded-circle shadow-1-strong me-3"
                   src="<%= asset_path("avatar.png")%>" alt="avatar" width="60" height="60" />
                 <% end %>

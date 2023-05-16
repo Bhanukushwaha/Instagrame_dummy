@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get 'home_modle' => "home#home_modle"
   devise_for :users, controllers: {sessions: "users/sessions", :registrations => "users/registrations", :passwords => "users/passwords"}
   get 'like' =>'posts#like', as: :like
   get 'unlike' =>'posts#unlike', as: :unlike
