@@ -1,30 +1,28 @@
 <% resource = User.new %>
-<%= form_for(resource, as: resource,remote: true, url: registration_path(resource)) do |f| %>
+<%= form_for(resource, as: resource,remote: true, url: registration_path(resource), :html => {:id => "signup_form"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>  
   <div class="w3-container" action="/action_page.php">
     <div class="w3-section">
       <label><b>First Name</b></label>
-      <%= f.text_field :first_name, autofocus: true, autocomplete: "firstname", placeholder: "FirstName",type: "text", :required => true, class: "w3-input w3-border w3-margin-bottom"%>      
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "firstname", placeholder: "FirstName",type: "text", class: "w3-input w3-border w3-margin-bottom"%><br>
       <label><b>Last Name</b></label>
-      <%= f.text_field :last_name, autofocus: true, autocomplete: "lastname", placeholder: "Last Name",type: "text",:required => true , class: "w3-input w3-border w3-margin-bottom"%>
-
+      <%= f.text_field :last_name, autofocus: true, autocomplete: "lastname", placeholder: "Last Name",type: "text" , class: "w3-input w3-border w3-margin-bottom"%><br>
       <label><b>Image</b></label>
-      <%= f.file_field :image, :required => true  %><br>
-
+      <%= f.file_field :image %><br>
       <label><b>Email</b></label>
       <div id="email_error" style="color: red;" ></div>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email",type: "text",:required => true , class: "w3-input w3-border w3-margin-bottom" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email",type: "text" , class: "w3-input w3-border w3-margin-bottom" %><br> 
                           
       <label><b>Password</b></label>
       <div id="sign_up_error" style="color: red;" ></div>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br/>
-      <%= f.password_field :password, autocomplete: "new-password", type: "password", placeholder: "Enter Password",:required => true , class: "w3-input w3-border" %>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", type: "password", placeholder: "Enter Password" , class: "w3-input w3-border" %><br> 
 
       <label><b>password_confirmation</b></label>
-       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w3-input w3-border",:required => true , placeholder: "Enter Password" %>         
-      <%= f.submit "Sign up" , class: "w3-button w3-block w3-green w3-section w3-padding"%>
+       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w3-input w3-border" , placeholder: "Enter Password" %>         
+      <%= f.submit "Sign up" , class: "w3-button w3-block w3-green w3-section w3-padding"%> 
     </div>
   </div>
 <% end %>
@@ -32,3 +30,57 @@
   <button class="w3-button w3-right w3-red w3-border"
   onclick="document.getElementById('id01').style.display='none'">Close</button>
 </div>
+
+<script>
+  $(document).ready(function() {
+  $("#signup_form").validate({
+      rules:{
+        'user[first_name]':
+        {
+          required: true,
+        },
+        'user[last_name]':
+        {
+          required: true,
+        },
+        'user[email]':
+        {
+          required: true,
+          // checkEmail: true
+        },
+        'user[password]':
+        {
+          required: true,
+          // checkUsername: true
+        },
+        'user[password_confirmation]':
+        {
+          required: true,
+          // checkPassword: true
+        },
+      },messages:{
+        'user[first_name]':{
+          required: "<p class='inline-errors'>Please enter first name</p>",
+        },
+        'user[last_name]':{
+          required: "<p class='inline-errors'> Please enter last name</p>",
+        },
+        'user[email]':{
+          required: "<p class='inline-errors'>Please enter email</p>",
+          // checkEmail: "<p class='inline-errors'>Please enter a valid email address.</p>"
+        },
+        'user[password]':{
+          required: "<p class='inline-errors'>Please enter password</p>",
+        },
+        'user[password_confirmation]':{
+          required: "<p class='inline-errors'>Please enter conform password</p>",
+        }
+      }
+    });
+  });
+</script>
+<style>
+.inline-errors{
+  color: red;
+}
+</style>

@@ -4,16 +4,16 @@
   <% end %>
 </div>
 <% resource = User.new %>
-<%= form_for(resource, as: resource,remote: true, url: session_path(resource)) do |f| %>
+<%= form_for(resource, as: resource,remote: true, url: session_path(resource),:html => {:id => "login_form"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class=" w3-container" action="/action_page.php">
     <div class="w3-section">
       <label><b>Enter Your Email</b></label>
       <div id="sign_in_error" style="color: red"></div>           
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your Email",type: "text", class: "w3-input w3-border w3-margin-bottom",:required => true%>        
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your Email",type: "text", class: "w3-input w3-border w3-margin-bottom"%> <br>       
       <label><b>Password</b></label>
       <div id="password_in_error" style="color: red"></div> 
-      <%= f.password_field :password, autocomplete: "current-password", type: "password", placeholder: "Enter Password", class: "w3-input w3-border",:required => true %>
+      <%= f.password_field :password, autocomplete: "current-password", type: "password", placeholder: "Enter Password", class: "w3-input w3-border" %>
       <%= f.submit "Log in" , class: "w3-button w3-block w3-green w3-section w3-padding"%>
 
       <%# if devise_mapping.rememberable? %>
@@ -30,3 +30,36 @@
  <%#= link_to "Forgot your password?", new_password_path(resource_name),class: "w3-right w3-padding w3-hide-small" %>
  <button class="w3-right w3-padding w3-bar-item w3-button" onclick="openCity(event, 'Paris')">Forget password</button>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $("#login_form").validate({
+      rules:{
+        'user[email]':
+        {
+          required: true,
+          // checkEmail: true
+        },
+        'user[password]':
+        {
+          required: true,
+          // checkUsername: true
+        },        
+      },
+      messages:{        
+        'user[email]':{
+          required: "<p class='inline-errors'>Please enter email</p>",
+          // checkEmail: "<p class='inline-errors'>Please enter a valid email address.</p>"
+        },
+        'user[password]':{
+          required: "<p class='inline-errors'>Please enter password</p>",
+        },
+      }
+    });
+  });
+</script>
+<style>
+.inline-errors{
+  color: red;
+}
+</style>
