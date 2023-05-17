@@ -1,9 +1,9 @@
 
 <div class="w3-container">
-  <div id="id01" class="w3-modal">
+  <div id="id011" class="w3-modal">
     <div class="w3-modal-content w3-animate-right">
       <header class="w3-container w3-teal"> 
-        <span onclick="document.getElementById('id01').style.display='none'" 
+        <span onclick="document.getElementById('id011').style.display='none'" 
         class="w3-button w3-display-topright">&times;</span>
         <h2>Modal Header</h2>
       </header>
@@ -13,7 +13,6 @@
           <% if @picture.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
-
               <ul>
                 <% @picture.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
@@ -21,7 +20,6 @@
               </ul>
             </div>
           <% end %>
-
           <div class="field">
             <%= form.label :post_id %>
             <%= form.select :post_id, Post.all.map { |e| [e.id]} %>
@@ -32,7 +30,6 @@
             <%= form.file_field :image,:onchange => "showimagepreview(this)",:class=>"img_file"  %><br>
              <img id="imgprvw" style="width: 200px; height: 94px; " />
           </div>
-
           <div class="actions">
             <%= form.submit %>
           </div>
