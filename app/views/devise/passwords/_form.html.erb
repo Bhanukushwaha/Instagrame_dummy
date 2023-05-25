@@ -1,6 +1,6 @@
 <h2>Forgot your password?</h2>
 <% resource = User.new %>
-<div id="resed_form" style="color: green;"></div>
+<div id="resed_form" style="color: red;"></div>
 <%= form_for(resource, as: resource,remote: true, url: password_path(resource), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 

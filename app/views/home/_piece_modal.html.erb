@@ -1,19 +1,19 @@
 <div class="w3-container">
   <div id="id01" class="w3-modal">
    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-    <header class="w3-container w3-blue"> 
+    <header class="w3-container w3-blue">
      <span onclick="document.getElementById('id01').style.display='none'" 
      class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
-     <h2>Header</h2>
+     <h2>Instragrame_Dummy</h2>
     </header>
-    <div class="w3-bar w3-border-bottom">
-     <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'London')">Log_in</button>
+    <div class="w3-bar w3-border-bottom">      
+     <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'London')">Log_in</button>     
      <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Tokyo')">Sign_up</button>
      <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Paris')"></button>
     </div>
     <div id="London" class=" w3-container city">
       <div class="loginform">
-       <%= render :partial =>  "devise/sessions/form", locals: { user: @user} %>
+      <%= render :partial =>  "devise/sessions/form", locals: { user: @user} %>
       </div>
     </div>
     <div id="Paris" class="w3-container city">     
@@ -27,7 +27,6 @@
   
 <script>
   document.getElementsByClassName("tablink")[0].click();
-
   function openCity(evt, cityName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("city");

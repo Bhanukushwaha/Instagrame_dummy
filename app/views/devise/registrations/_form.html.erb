@@ -3,7 +3,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>  
   <div class="w3-container" action="/action_page.php">
     <div class="w3-section">
-      <label><b>First Name</b></label>
+      <label><b>First Name</b></label> 
       <%= f.text_field :first_name, autofocus: true, autocomplete: "firstname", placeholder: "FirstName",type: "text", class: "w3-input w3-border w3-margin-bottom"%><br>
       <label><b>Last Name</b></label>
       <%= f.text_field :last_name, autofocus: true, autocomplete: "lastname", placeholder: "Last Name",type: "text" , class: "w3-input w3-border w3-margin-bottom"%><br>
@@ -11,7 +11,7 @@
       <%= f.file_field :image %><br>
       <label><b>Email</b></label>
       <div id="email_error" style="color: red;" ></div>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email",type: "text" , class: "w3-input w3-border w3-margin-bottom" %><br> 
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email",type: "text" , class: "w3-input w3-border w3-margin-bottom" %><br>
                           
       <label><b>Password</b></label>
       <div id="sign_up_error" style="color: red;" ></div>
@@ -26,6 +26,7 @@
     </div>
   </div>
 <% end %>
+
 <div class="w3-container w3-light-grey w3-padding">
   <button class="w3-button w3-right w3-red w3-border"
   onclick="document.getElementById('id01').style.display='none'">Close</button>
@@ -79,8 +80,9 @@
     });
   });
 </script>
+
 <style>
-.inline-errors{
+ .inline-errors{
   color: red;
-}
+ }
 </style>
