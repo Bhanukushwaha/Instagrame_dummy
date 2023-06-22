@@ -33,17 +33,16 @@
     <% @posts.each  do |post| %>
       <% if post.pictures.any? && post.pictures.first.image.present? %>
         <%= link_to post_path(post.id) do %>
-         <%= image_tag post.pictures.first.image.url, style: "width: 300px; height: 300px; padding-right: 8px;" %>
+        <%= image_tag post.pictures.first.image.url, style: "width: 300px; height: 300px; padding-right: 8px;" %>
         <% end %>
       <% else %>
         <%= link_to post_path(post.id) do %>
-         <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar", style="width: 200px height: 200px; padding-right: 8px;" />
+        <img src="<%= asset_path("imageleptop.jpeg")%>" alt="avatar", style="width: 200px height: 200px; padding-right: 8px;" />
         <% end %>
       <% end %>
     <% end %>
   </div> 
 </div>
-
 <div id="id01" class="w3-modal">
   <div class="w3-modal-content w3-card-4 w3-animate-zoom">
     <header class="w3-container w3-blue"> 
@@ -117,42 +116,40 @@
     </div>
   </div>
 </div>
-
-
 <style>
-* {
-  box-sizing: border-box;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-#myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 70%;
-  border-radius: 10px;
-  font-size: 16px;
-  padding: 12px 20px 8px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 14px;
-}
+  #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 70%;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 12px 20px 8px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 14px;
+  }
 
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-}
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+  }
 
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 7px;
-}
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 7px;
+  }
 
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
+  #myTable tr {
+    border-bottom: 1px solid #ddd;
+  }
 
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
+  #myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+  }
 </style>

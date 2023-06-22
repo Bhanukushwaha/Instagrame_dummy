@@ -1,3 +1,8 @@
 document.getElementById("recipient-name").value = ""
 $('.comm_section').html("<%= escape_javascript render 'comments/comment_section' %>");
 $('.homes_section').html("<%= escape_javascript render 'comments/comment_section' %>");
+$(document).ready(function() {
+	const newNameInput = document.getElementById("recipient-name");
+	const name = newNameInput.value;
+	newNameInput.value = "";
+});
