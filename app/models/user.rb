@@ -16,5 +16,5 @@ class User < ApplicationRecord
    user_na = self.email.split('@').first
    self.user_name = user_na
    self.save
-  end 
+  end
 end
